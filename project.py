@@ -1,5 +1,6 @@
 from os import system, name
 import string
+import re
 
 def clear():
     if name == 'nt':
@@ -20,12 +21,35 @@ number_of_patrol_boats = 3
 boats = {}
 
 def define_boats(number_of_patrol_boats, number_of_submarines, number_of_cruisers, number_of_battleships, number_of_carriers):
-    boats["carriers"] = {"size" : 5, "number" : number_of_carriers}
-    boats["battleships"] = {"size" : 4, "number" : number_of_battleships}
-    boats["cruisers"] = {"size" : 3, "number" : number_of_cruisers}
-    boats["submarines"] = {"size" : 3, "number" : number_of_submarines}
-    boats["patrol_boats"] = {"size" : 3, "number" : number_of_patrol_boats}
+    boats["carrier"] = {"size" : 5, "number" : number_of_carriers}
+    boats["battleship"] = {"size" : 4, "number" : number_of_battleships}
+    boats["cruiser"] = {"size" : 3, "number" : number_of_cruisers}
+    boats["submarine"] = {"size" : 3, "number" : number_of_submarines}
+    boats["patrol_boat"] = {"size" : 3, "number" : number_of_patrol_boats}
     return boats
+
+def get_input(prompt):
+    string = input(prompt)
+    print(string + 'nigger')
+    letter = (re.findall(r'\D', string))[0].upper()
+    number = int(re.findall(r'\d+', string)[0])
+    return [letter, number]
+
+def suggest_placement(boat, board):
+    length = boat['size']
+    start_point = get_input('Where would you like to put this ship\'s bow? ')
+    looper = True
+    while looper == True:
+        try:
+            if not board[start_point[1]][start_point[0]] == []:
+                looper == false
+                return False
+            else:
+                return True
+                looper == false
+        except KeyError:
+            string = get_input('Please enter a valid and empty location ')
+
 
 boats = define_boats(number_of_patrol_boats, number_of_submarines, number_of_cruisers, number_of_battleships, number_of_carriers)
 
@@ -38,6 +62,7 @@ patrol_boat_size = 2
 player_board = {}
 computer_board = {}
 player_radar = {}
+player_display = {}
 
 def create_board(board, number_of_rows, number_of_columns):
     for i in range(number_of_rows):
@@ -55,24 +80,14 @@ def display(board):
             line_display.append(board[row][column])
         print(line_display)
 
-
-
 def datadisplay(board):
     df = pd.DataFrame(data=board)
     print(df)
 
 player_board = create_board(player_board, number_of_rows, number_of_columns)
 computer_board = create_board(computer_board, number_of_rows, number_of_columns)
-computer_board = create_board(player_radar, number_of_rows, number_of_columns)
+player_radar = create_board(player_radar, number_of_rows, number_of_columns)
+player_display = create_board(player_display, number_of_rows, number_of_columns)
 
+sample_board = {1: {'A': [], 'B': [], 'C': [], 'D': ['s'], 'E': ['s'], 'F': ['s'], 'G': [], 'H': [], 'I': ['s'], 'J': []}, 2: {'A': ['s'], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': ['s'], 'J': []}, 3: {'A': ['s'], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': ['s'], 'J': []}, 4: {'A': ['s'], 'B': [], 'C': ['s'], 'D': [], 'E': [], 'F': ['s'], 'G': ['s'], 'H': [], 'I': ['s'], 'J': []}, 5: {'A': [], 'B': [], 'C': ['s'], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': []}, 6: {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': []}, 7: {'A': [], 'B': ['s'], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': []}, 8: {'A': [], 'B': ['s'], 'C': [], 'D': [], 'E': [], 'F': ['s'], 'G': ['s'], 'H': ['s'], 'I': [], 'J': []}, 9: {'A': [], 'B': [], 'C': [], 'D': [], 'E': [], 'F': [], 'G': [], 'H': [], 'I': [], 'J': []}, 10: {'A': [], 'B': ['s'], 'C': ['s'], 'D': ['s'], 'E': ['s'], 'F': ['s'], 'G': [], 'H': [], 'I': [], 'J': []}}
 
-print(boats)
-
-print(player_board)
-
-display(player_radar)
-print("----------------------------------------------------------------------------")
-display(player_board)
-
-
-print(player_board[1]["A"])
