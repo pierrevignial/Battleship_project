@@ -72,6 +72,21 @@ def create_board(board, number_of_rows, number_of_columns):
         board[i + 1] = line
     return board
 
+import pandas
+board = pandas.DataFrame(data='O', index=range(1,10+1), columns=list('ABCDEFGHIJ'))
+
+def play():
+    input=('Hey Player, where are you shooting this time : ')
+    if  board.iloc[input[0],input[1]] != 'S' :
+                board.iat[input[0], input[1]] = '0'
+                print('You hit the water ... Go next try')
+    elif board.iloc[input[0],input[1]] == 'S' :
+                board.iat[input[0], input[1]] = 'X'
+                print('OMG You hit a boat !')
+    else :
+        print('You managed to miss the ocean, try again with a letter'
+              'between A and J and a digit between 0 and 9')
+
 def display(board):
     clear()
     for row in board.keys():
