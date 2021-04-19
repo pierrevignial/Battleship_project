@@ -30,7 +30,6 @@ def define_boats(number_of_patrol_boats, number_of_submarines, number_of_cruiser
 
 def get_input(prompt):
     string = input(prompt)
-    print(string + 'nigger')
     letter = (re.findall(r'\D', string))[0].upper()
     number = int(re.findall(r'\d+', string)[0])
     return [letter, number]
